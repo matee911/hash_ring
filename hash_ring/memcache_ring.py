@@ -19,7 +19,8 @@ class MemcacheRing(memcache.Client):
 
     def _get_server(self, key):
         if type(key) == types.TupleType:
-            return memcache.Client._get_server(key)
+            #return memcache.Client._get_server(key)
+            return super(MemcacheRing, self)._get_server(key)
 
         for i in range(self._SERVER_RETRIES):
             iterator = self.hash_ring.iterate_nodes(key)
